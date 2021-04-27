@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>防抖节流</title>
+  </head>
+  <body>
+    <button id="btn">防抖(一秒内只能点击一次)</button>
+    <script>
+      /******* 简易版实现 */
+      // btn.onclick = debounce(func, 1000)
+      // function debounce(fn, wait) {
+      //   let timeout
+      //   return function () {
+      //     let arg = arguments
+      //     clearTimeout(timeout)
+      //     timeout = setTimeout(() => {
+      //       fn(arg, 'shanxinlin')
+      //     }, wait)
+      //   }
+      // }
+      // function func(e, name) {
+      //   console.log(e[0].srcElement, name) // <button id=​"btn">​点击防抖​</button>​ shanxinlin
+      // }
+
+      /******* 立即执行版实现*/
+      btn.onclick = debounce(func, 1000)
+      function debounce(fn, wait) {
+        let timeout = null
+        return function () {
+          let arg = arguments
+          let now = !timeout
+          timeout && clearTimeout(timeout)
+          timeout = setTimeout(() => {
+            timeout = null
+          }, wait)
+          if( now ){
+            fn(arg, 'shanxinlin')
+          }
+        }
+      }
+      function func(e, name) {
+        console.log(e[0].srcElement, name) // <button id=​"btn">​点击防抖​</button>​ shanxinlin
+      }
+    </script>
+  </body>
+</html>
