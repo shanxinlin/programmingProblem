@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>防抖节流</title>
+  </head>
+  <body>
+    <button id="btn">节流(一秒内只能点击一次)</button>
+    <script>
+      // 原理：规定在一个单位时间内，只能触发一次函数。如果这个单位时间内触发多次函数，只有一次生效。
+
+      /******* 时间戳实现 */
+      // btn.onclick = debounce(func, 1000)
+      // function debounce(fn, wait) {
+      //   let time = 0
+      //   return function () {
+      //     let now = Date.now();
+      //     if(now - time > wait){
+      //       func(arguments, this)
+      //       time = now;
+      //     }
+      //   }
+      // }
+      // function func(e, that) {
+      //   console.log(e[0].srcElement, that)
+      // }
+
+      /******* 定时器版实现*/
+      btn.onclick = debounce(func, 1000)
+      function debounce(fn, wait) {
+        let timeout
+        return function () {
+          if (!timeout) {
+            timeout = setTimeout(() => {
+              timeout = null
+              console.log(this)
+            }, wait)
+          }
+        }
+      }
+      function func(e, that) {
+        console.log(e[0].srcElement, that)
+      }
+    </script>
+  </body>
+</html>

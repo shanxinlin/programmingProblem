@@ -9,6 +9,8 @@
   <body>
     <button id="btn">防抖(一秒内只能点击一次)</button>
     <script>
+      // 原理：在事件被触发n秒后在执行回调，如果在这n秒内又被触发，则重新计时。
+
       /******* 简易版实现 */
       // btn.onclick = debounce(func, 1000)
       // function debounce(fn, wait) {
@@ -36,7 +38,7 @@
           timeout = setTimeout(() => {
             timeout = null
           }, wait)
-          if( now ){
+          if (now) {
             fn(arg, 'shanxinlin')
           }
         }
